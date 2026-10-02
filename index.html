@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoHub - منصة محمد للمحتوى الرقمي</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: Tahoma, sans-serif;
+        }
+        .navbar { background-color: rgba(15, 23, 42, 0.95); backdrop-filter: blur(10px); }
+        .navbar-brand { color: #38bdf8 !important; font-weight: bold; font-size: 1.6rem; letter-spacing: 1px; }
+        
+        /* مكان الإعلان العلوي */
+        .ad-banner-top {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            border: 1px dashed #38bdf8;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 80px;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #94a3b8;
+        }
+
+        .hero-banner {
+            background: linear-gradient(rgba(15, 23, 42, 0.7), rgba(15, 23, 42, 0.9)), url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1200&auto=format&fit=crop') no-repeat center center/cover;
+            height: 45vh;
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+        .card { background-color: #1e293b; border: none; color: #fff; border-radius: 10px; transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .card-img-top { height: 200px; object-fit: cover; border-top-left-radius: 10px; border-top-right-radius: 10px; }
+        .btn-primary { background-color: #0284c7; border: none; }
+        .btn-primary:hover { background-color: #0369a1; }
+        
+        /* مكان الإعلان الجانبي */
+        .ad-sidebar {
+            background-color: #1e293b;
+            border: 1px dashed #64748b;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            color: #94a3b8;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            border-top: 1px solid #1e293b;
+            margin-top: 50px;
+            padding: 20px 0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل العلوي -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand" href="#"><i class="fas fa-cube me-2 text-info"></i>Mo<span class="text-white">Hub</span></a>
+            <div class="d-flex align-items-center gap-3">
+                <span class="badge bg-success d-none d-md-inline-block">إشراف: محمد</span>
+                <input id="searchInput" class="form-control form-control-sm bg-dark text-white border-secondary" type="search" placeholder="ابحث في المنصة...">
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        
+        <!-- 💡 منطقة الإعلان العلوي -->
+        <div class="ad-banner-top mb-4" id="topAdZone"></div>
+
+        <div class="row">
+            <!-- المحتوى الرئيسي -->
+            <div class="col-lg-9">
+                <!-- واجهة ترحيبية -->
+                <div class="hero-banner shadow">
+                    <div>
+                        <span class="badge bg-info text-dark mb-2">منصة إلكترونية متكاملة</span>
+                        <h1 class="display-6 fw-bold">مرحباً بكم في MoHub</h1>
+                        <p class="text-light small">بوابتك الأولى لاحتراف البرمجة، التقنية، وتطوير الذات.</p>
+                        <button class="btn btn-primary btn-sm" onclick="openPlayerModal('مقدمة في منصات البث', 'https://www.youtube.com/embed/3JZ_D3ELwOQ')"><i class="fas fa-play me-1"></i> ابدأ الاستعراض</button>
+                    </div>
+                </div>
+
+                <!-- قائمة المحتوى -->
+                <h4 class="mb-3 text-info border-bottom pb-2 border-secondary"><i class="fas fa-video me-2"></i>المحتوى والدروس المميزة</h4>
+                <div class="row row-cols-1 row-cols-md-3 g-4" id="videosContainer">
+                    <!-- يتم حقن المحتوى ديناميكياً -->
+                </div>
+            </div>
+
+            <!-- الشريط الجانبي -->
+            <div class="col-lg-3 mt-4 mt-lg-0">
+                <div class="ad-sidebar shadow-sm" id="sidebarAdZone"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- تذييل الصفحة -->
+    <footer>
+        <p>جميع الحقوق محفوظة © 2026 - تم التطوير بواسطة **محمد** عبر منصة MoHub</p>
+    </footer>
+
+    <!-- Modal نافذة تشغيل الفيديو -->
+    <div class="modal fade" id="videoModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content bg-dark text-white border-secondary">
+                <div class="modal-header border-secondary">
+                    <h5 class="modal-title" id="modalTitle">عنوان الفيديو</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="stopVideo()"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="activeVideoFrame" src="" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // محاكي الإعلانات
+        function loadSimulatedAds() {
+            document.getElementById('topAdZone').innerHTML = `
+                <div style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 0 10px;">
+                    <div>
+                        <span class="badge bg-warning text-dark mb-1">إعلان ممول (رعاية MoHub)</span>
+                        <p class="mb-0 text-white small">تعلم البرمجة وابدأ مشروعك التقني الأول اليوم بكل سهولة!</p>
+                    </div>
+                    <span class="badge bg-secondary" style="font-size: 10px;">Adsterra Mock ID #98231</span>
+                </div>
+            `;
+
+            document.getElementById('sidebarAdZone').innerHTML = `
+                <i class="fas fa-bolt fa-2x mb-2 text-info"></i>
+                <h6 class="text-white">عروض البرمجة السحابية</h6>
+                <p class="small mb-3 text-muted">احصل على استضافة مجانية لشهر كامل عند تطوير منصتك القادمة.</p>
+                <button class="btn btn-outline-info btn-sm w-100" onclick="alert('رابط تجريبي لعرض الشركة الراعية!')">اكتشف العرض</button>
+                <span class="badge bg-dark text-muted mt-3" style="font-size: 9px;">Banner 300x250 (Active)</span>
+            `;
+        }
+        window.addEventListener('DOMContentLoaded', loadSimulatedAds);
+
+        // قاعدة بيانات المحتوى المفيد والمحدث
+        const contentData = [
+            { id: 1, title: "احتراف JavaScript والتعامل مع المصفوفات", category: "برمجة وتطوير", image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/5qap5aO4i9A" },
+            { id: 2, title: "تصميم واجهات المستخدم العصري باستخدام CSS", category: "تصميم رقمي", image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/1Rs2kttvKYI" },
+            { id: 3, title: "ثورة الذكاء الاصطناعي وكيف تغير العالم", category: "تكنولوجيا المستقبل", image: "https://images.unsplash.com/photo-1677442136019-21780efad99a?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/JMUxmLyrhSk" },
+            { id: 4, title: "أسرار إدارة الوقت والإنتاجية للمبرمجين", category: "تطوير الذات", image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/fJ9rUzIMcZQ" },
+            { id: 5, title: "مدخل شامل لإطار العمل Bootstrap 5", category: "برمجة وتطوير", image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/4sosXZsdy-s" },
+            { id: 6, title: "كيف تبدأ مشروعك البرمجي الأول على الإنترنت", category: "رواد الأعمال", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=400&auto=format&fit=crop", url: "https://www.youtube.com/embed/8aGhZQkoFbQ" }
+        ];
+
+        const videosContainer = document.getElementById('videosContainer');
+        const searchInput = document.getElementById('searchInput');
+
+        function renderContent(filter = "") {
+            videosContainer.innerHTML = "";
+            let list = contentData.filter(item => item.title.toLowerCase().includes(filter.toLowerCase()) || item.category.toLowerCase().includes(filter.toLowerCase()));
+
+            if (list.length === 0) {
+                videosContainer.innerHTML = `<div class="col-12 text-center text-muted py-4"><h5>لا توجد نتائج مطابقة</h5></div>`;
+                return;
+            }
+
+            list.forEach(item => {
+                const col = document.createElement('div');
+                col.className = "col";
+                col.innerHTML = `
+                    <div class="card h-100 shadow-sm">
+                        <img src="${item.image}" class="card-img-top" alt="${item.title}">
+                        <div class="card-body d-flex flex-column justify-content-between">
+                            <div>
+                                <span class="badge bg-secondary mb-2" style="font-size: 0.75rem;">${item.category}</span>
+                                <h6 class="card-title fw-bold">${item.title}</h6>
+                            </div>
+                            <button class="btn btn-sm btn-primary w-100 mt-3" onclick="openPlayerModal('${item.title}', '${item.url}')">
+                                <i class="fas fa-play me-1"></i> مشاهدة المحتوى
+                            </button>
+                        </div>
+                    </div>
+                `;
+                videosContainer.appendChild(col);
+            });
+        }
+
+        function openPlayerModal(title, url) {
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('activeVideoFrame').src = url;
+            new bootstrap.Modal(document.getElementById('videoModal')).show();
+        }
+
+        function stopVideo() {
+            document.getElementById('activeVideoFrame').src = "";
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            renderContent(e.target.value);
+        });
+
+        renderContent();
+    </script>
+</body>
+</html>
+
+</body>
+</html>
